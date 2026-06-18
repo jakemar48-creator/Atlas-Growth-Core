@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atlas Growth Core builds CRM infrastructure, automation, and AI systems that ensure every lead is contacted, followed up, qualified, and handed to sales." />
+  <title>Atlas Growth Core | Growth Systems & Automation Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #09100D;
+      color: #FAFAFA;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ─── CSS VARIABLES ──────────────────────────────── */
+    :root {
+      --bg:            #09100D;
+      --surface-1:     #0D1610;
+      --surface-2:     #111B15;
+      --surface-3:     #162211;
+      --border:        #1A3020;
+      --border-green:  rgba(34,197,94,0.2);
+      --border-orange: rgba(249,115,22,0.35);
+      --border-red:    rgba(239,68,68,0.35);
+      --green:         #22C55E;
+      --green-dim:     #16A34A;
+      --green-soft:    rgba(34,197,94,0.08);
+      --orange:        #F97316;
+      --orange-dim:    #EA580C;
+      --orange-soft:   rgba(249,115,22,0.08);
+      --red:           #EF4444;
+      --red-soft:      rgba(239,68,68,0.08);
+      --text-white:    #FAFAFA;
+      --text-muted:    #9CA3AF;
+      --text-dim:      #6B7280;
+    }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      * { scroll-behavior: auto !important; }
+    }
+
+    /* ─── TYPOGRAPHY HELPERS ─────────────────────────── */
+    .green  { color: var(--green); }
+    .orange { color: var(--orange); }
+    .muted  { color: var(--text-muted); }
+    .red    { color: var(--red); }
+
+    /* ─── EYEBROW PILL ───────────────────────────────── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .pill-green  { background: rgba(34,197,94,0.12);  color: var(--green);  border: 1px solid rgba(34,197,94,0.25); }
+    .pill-orange { background: rgba(249,115,22,0.15); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+    .pill-red    { background: rgba(239,68,68,0.15);  color: var(--red);    border: 1px solid rgba(239,68,68,0.3); }
+
+    /* ─── BUTTONS ────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 16px 32px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, border-color 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .btn-orange {
+      background: var(--orange);
+      color: #fff;
+    }
+    .btn-orange:hover { background: var(--orange-dim); transform: translateY(-1px); }
+
+    .btn-outline-green {
+      background: var(--surface-2);
+      color: var(--text-white);
+      border: 1px solid rgba(34,197,94,0.4);
+    }
+    .btn-outline-green:hover { border-color: var(--green); background: rgba(34,197,94,0.06); transform: translateY(-1px); }
+
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+    }
+    .btn-green:hover { background: var(--green-dim); transform: translateY(-1px); }
+
+    .btn-dark-outline {
+      background: var(--surface-2);
+      color: var(--text-white);
+      border: 1px solid rgba(34,197,94,0.4);
+    }
+    .btn-dark-outline:hover { border-color: var(--green); background: rgba(34,197,94,0.06); transform: translateY(-1px); }
+
+    /* ─── CARD BASE ──────────────────────────────────── */
+    .card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.25s;
+    }
+
+    /* ─── SECTION WRAPPER ────────────────────────────── */
+    .section {
+      padding: clamp(60px, 8vw, 100px) 0;
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 40px);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: clamp(40px, 5vw, 64px);
+    }
+    .section-header h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      font-size: clamp(14px, 2vw, 16px);
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  1. NAVIGATION                                    */
+    /* ══════════════════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9,16,13,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid #1A3020;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 40px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--green);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .nav-logo-text span:first-child { color: var(--text-white); }
+    .nav-logo-text span:last-child  { color: var(--green); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-white); }
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-cta .btn { padding: 10px 20px; font-size: 14px; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--surface-1);
+      border-bottom: 1px solid var(--border);
+      padding: 16px clamp(20px,4vw,40px) 24px;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 500;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--text-white); }
+    .mobile-menu .btn { margin-top: 12px; width: 100%; justify-content: center; }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  2. HERO                                          */
+    /* ══════════════════════════════════════════════════ */
+    .hero {
+      padding: clamp(72px, 10vw, 120px) 0 clamp(60px, 8vw, 100px);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(34,197,94,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 clamp(20px, 4vw, 40px);
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 8vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero-sub-bold {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 6px;
+    }
+    .hero-sub-muted {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-sub-2 {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 40px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  TRUSTED BY                                       */
+    /* ══════════════════════════════════════════════════ */
+    .trusted-by {
+      padding: 36px 0;
+      background: var(--surface-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .trusted-by-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 28px;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(32px, 6vw, 64px);
+      flex-wrap: wrap;
+    }
+    .logo-item {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      opacity: 0.6;
+      transition: opacity 0.25s ease;
+    }
+    .logo-item:hover { opacity: 1; }
+    .logo-item img,
+    .logo-item svg {
+      height: 100%;
+      width: auto;
+      display: block;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  3. PROBLEM SECTION                               */
+    /* ══════════════════════════════════════════════════ */
+    .problem { background: var(--bg); }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .problem-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s;
+    }
+    .problem-card:hover { border-color: rgba(239,68,68,0.55); }
+    .problem-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .problem-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .problem-quote {
+      background: var(--surface-2);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 16px;
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .problem-quote p {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  4. METHODOLOGY                                   */
+    /* ══════════════════════════════════════════════════ */
+    .methodology { background: var(--surface-1); }
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .method-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .method-card:hover { border-color: rgba(34,197,94,0.45); transform: translateY(-2px); }
+    .method-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .method-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  5. WHAT WE BUILD                                 */
+    /* ══════════════════════════════════════════════════ */
+    .services { background: var(--bg); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .service-card:hover { border-color: var(--border-green); transform: translateY(-2px); }
+    .service-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .tag-green  { background: rgba(34,197,94,0.12);  color: var(--green);  border: 1px solid rgba(34,197,94,0.25); }
+    .tag-orange { background: rgba(249,115,22,0.12); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+    .tag-teal   { background: rgba(20,184,166,0.12); color: #14B8A6;       border: 1px solid rgba(20,184,166,0.3); }
+    .service-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .service-card h3 {
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  6. PRICING                                       */
+    /* ══════════════════════════════════════════════════ */
+    .pricing { background: var(--surface-1); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+    .pricing-card:hover { border-color: rgba(34,197,94,0.45); }
+    .pricing-card.featured {
+      border-color: rgba(249,115,22,0.45);
+    }
+    .pricing-card.featured:hover { border-color: rgba(249,115,22,0.7); }
+    .badge-popular {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 100px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .pricing-tier {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .pricing-name {
+      font-size: clamp(17px, 2vw, 20px);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .pricing-amount {
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-amount span {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--green);
+    }
+    .pricing-breakdown {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .pricing-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+    .pricing-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .pricing-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .check-green {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check-green svg { width: 10px; height: 10px; }
+    .pricing-card .btn { width: 100%; justify-content: center; }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  7. ABOUT                                         */
+    /* ══════════════════════════════════════════════════ */
+    .about { background: var(--bg); }
+    .about-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 60px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+    .about-text p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-pillars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .pillar-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.25s;
+    }
+    .pillar-card:hover { border-color: rgba(34,197,94,0.45); }
+    .pillar-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .pillar-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  8. FREE ASSESSMENT                               */
+    /* ══════════════════════════════════════════════════ */
+    .assessment {
+      background: var(--surface-1);
+      position: relative;
+      overflow: hidden;
+    }
+    .assessment::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(249,115,22,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .assessment-inner {
+      position: relative;
+      text-align: center;
+    }
+    .assessment-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 44px;
+      text-align: left;
+    }
+    .checklist-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .checklist-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .check-orange {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0px;
+    }
+    .check-orange svg { width: 11px; height: 11px; }
+    .score-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(249,115,22,0.35);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .score-number-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .score-box {
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .score-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+    .score-card h3 {
+      font-size: clamp(17px, 2vw, 21px);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .score-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .score-card .btn { width: 100%; justify-content: center; }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  9. FAQ                                           */
+    /* ══════════════════════════════════════════════════ */
+    .faq { background: var(--bg); }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .faq-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(34,197,94,0.18);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.25s;
+    }
+    .faq-card:hover { border-color: rgba(34,197,94,0.4); }
+    .faq-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .faq-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  10. FOOTER                                       */
+    /* ══════════════════════════════════════════════════ */
+    .footer {
+      background: #080E0B;
+      border-top: 1px solid #1A3020;
+      padding: 40px 0 28px;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ══════════════════════════════════════════════════ */
+    /*  RESPONSIVE                                       */
+    /* ══════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .about-body { grid-template-columns: 1fr; gap: 28px; }
+      .assessment-cards { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .method-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { width: 100%; }
+      .method-grid { grid-template-columns: 1fr; }
+      .about-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* SVG checkmark inline */
+    .check-svg { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════ -->
+<!--  NAVIGATION                           -->
+<!-- ══════════════════════════════════════ -->
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Atlas Growth Core Home">
+      <div class="logo-icon">A</div>
+      <div class="nav-logo-text">
+        <span>Atlas </span><span>Growth Core</span>
+      </div>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#problem">Problem</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-orange">Book Free Audit →</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <a href="#problem" class="mobile-link">Problem</a>
+    <a href="#methodology" class="mobile-link">Methodology</a>
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#pricing" class="mobile-link">Pricing</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+    <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-orange">Book Free Audit →</a>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════════════ -->
+<!--  HERO                                 -->
+<!-- ══════════════════════════════════════ -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-inner reveal">
+    <div class="pill pill-green">Growth Systems &amp; Automation Agency</div>
+    <h1 id="hero-heading">Turn Every Lead Into Revenue,<br><span class="orange">Automatically</span></h1>
+    <p class="hero-sub-bold">Atlas Growth Core builds CRM infrastructure, automation,</p>
+    <p class="hero-sub-muted">and AI systems that ensure every lead is contacted, followed up, qualified, and handed to sales.</p>
+    <p class="hero-sub-2">Most businesses don't lose money from lack of traffic. They lose it because their systems fail after the click.</p>
+    <div class="hero-ctas">
+      <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-orange">Book A Free Growth Audit →</a>
+      <a href="#methodology" class="btn btn-outline-green">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  TRUSTED BY                           -->
+<!-- ══════════════════════════════════════ -->
+<section class="trusted-by" aria-labelledby="trusted-by-heading">
+  <div class="container">
+    <p id="trusted-by-heading" class="trusted-by-label">Trusted By Growing Businesses</p>
+    <div class="logo-row reveal">
+      <span class="logo-item">
+        <img src="assets/logos/landcurator.png" alt="Landcurator logo" loading="lazy">
+      </span>
+      <span class="logo-item">
+        <svg viewBox="0 0 176 40" role="img" aria-label="Ownahome logo">
+          <path d="M2 37V13.6667L17 2L32 13.6667V18.1389C31.375 17.9444 30.75 17.7986 30.125 17.7014C29.5 17.6042 28.875 17.5556 28.25 17.5556C24.5938 17.5556 21.4925 18.8758 18.9462 21.5164C16.3987 24.1582 15.125 27.375 15.125 31.1667C15.125 32.2037 15.2269 33.2083 15.4306 34.1806C15.6331 35.1528 15.9531 36.0926 16.3906 37H2Z" fill="#FFFFFF"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M27.8044 38.0976C32.3843 38.0976 36.0971 34.3848 36.0971 29.8049C36.0971 25.225 32.3843 21.5122 27.8044 21.5122C23.2245 21.5122 19.5117 25.225 19.5117 29.8049C19.5117 34.3848 23.2245 38.0976 27.8044 38.0976ZM30.5 32C32.9853 32 35 29.9853 35 27.5C35 25.0147 32.9853 23 30.5 23C28.0147 23 26 25.0147 26 27.5C26 29.9853 28.0147 32 30.5 32Z" fill="#FFFFFF"/>
+          <path d="M50.2373 23.112H47.8133L44.1173 31.2L40.8293 23.112H36.3893L41.9813 36H45.5813L49.0133 29.064L52.4213 36H56.0453L61.6133 23.112H57.1973L53.8853 31.2L50.2373 23.112ZM61.8646 23.112V36H66.0886V29.208C66.0886 27.048 67.7686 25.632 70.2646 25.632C72.7126 25.632 74.4886 26.784 74.4886 28.968V36H78.6886V28.968C78.6886 25.08 75.9286 22.512 71.6566 22.512C69.0166 22.512 66.9526 23.568 65.7286 25.296V23.112H61.8646ZM94.2901 36V28.128C94.2901 24.768 91.5781 22.512 87.3781 22.512C84.8821 22.512 82.4341 23.448 81.2581 24.24L82.1221 26.904C83.1781 26.208 84.8341 25.656 86.4421 25.656C89.0101 25.656 90.7381 26.64 90.7381 28.2V29.064C89.8261 27.912 88.2901 27.264 86.3461 27.264C83.0341 27.264 80.4661 29.136 80.4661 31.92C80.4661 34.752 82.9381 36.6 86.2741 36.6C88.3381 36.6 89.9221 35.856 90.8341 34.632V36H94.2901ZM84.2821 31.92C84.2821 30.792 85.6501 29.976 87.3301 29.976C89.2021 29.976 90.4741 30.816 90.4741 31.92C90.4741 33.048 89.2021 33.888 87.3301 33.888C85.6501 33.888 84.2821 33.072 84.2821 31.92ZM109.154 28.968V36H113.354V28.968C113.354 25.08 110.594 22.512 106.322 22.512C103.922 22.512 101.978 23.4 100.73 24.864V16.536H96.5303V36H100.73V29.208C100.73 27.048 102.41 25.632 104.93 25.632C107.378 25.632 109.154 26.784 109.154 28.968ZM123.148 22.512C118.468 22.512 114.7 25.68 114.7 29.568C114.7 33.456 118.468 36.6 123.148 36.6C127.804 36.6 131.572 33.456 131.572 29.568C131.572 25.68 127.804 22.512 123.148 22.512ZM118.372 29.568C118.372 27.528 120.412 25.968 123.148 25.968C125.884 25.968 127.924 27.528 127.924 29.568C127.924 31.584 125.884 33.144 123.148 33.144C120.412 33.144 118.372 31.584 118.372 29.568ZM142.573 27.744V36H146.797V27.984C146.797 26.664 147.901 25.632 149.485 25.632C151.021 25.632 152.053 26.544 152.053 27.744V36H156.277V27.744C156.277 24.48 154.141 22.512 150.757 22.512C148.621 22.512 146.989 23.4 146.077 24.864C145.189 23.352 143.509 22.512 141.301 22.512C139.261 22.512 137.701 23.304 136.765 24.624V23.112H133.093V36H137.317V27.984C137.317 26.664 138.421 25.632 140.005 25.632C141.541 25.632 142.573 26.544 142.573 27.744ZM174.267 32.904L170.931 31.848C170.115 32.736 168.459 33.36 166.755 33.36C164.307 33.36 162.651 32.328 162.099 30.84H174.819C175.971 26.808 172.755 22.512 166.635 22.512C161.451 22.512 158.091 25.68 158.091 29.568C158.091 33.456 161.451 36.6 166.635 36.6C170.067 36.6 172.947 34.992 174.267 32.904ZM162.171 28.224C162.795 26.76 164.379 25.68 166.755 25.68C169.299 25.68 170.859 26.832 171.027 28.224H162.171Z" fill="#FFFFFF"/>
+        </svg>
+      </span>
+      <span class="logo-item">
+        <img src="assets/logos/doctor-izie.png" alt="Doctor Izie logo" loading="lazy">
+      </span>
+      <span class="logo-item">
+        <img src="assets/logos/smart-living.png" alt="Smart Living logo" loading="lazy">
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  PROBLEM SECTION                      -->
+<!-- ══════════════════════════════════════ -->
+<section id="problem" class="section problem" aria-labelledby="problem-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="pill pill-red">The Real Problem</div>
+      <h2 id="problem-heading">The Problem Isn't Traffic.<br><span class="muted">It's What Happens After.</span></h2>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <h3>Delayed Responses</h3>
+        <p>Leads go unanswered for minutes, sometimes hours. By then, they've already called your competitor.</p>
+      </div>
+      <div class="problem-card reveal">
+        <h3>Missed Opportunities</h3>
+        <p>Missed calls are never recovered. No callback system, no text follow-up, no second chance.</p>
+      </div>
+      <div class="problem-card reveal">
+        <h3>No Segmentation</h3>
+        <p>No lead segmentation or prioritization means hot prospects are treated the same as cold ones.</p>
+      </div>
+      <div class="problem-card reveal">
+        <h3>Inconsistent Follow-Ups</h3>
+        <p>Manual, inconsistent follow-up processes let revenue slip through every week without notice.</p>
+      </div>
+      <div class="problem-card reveal" style="grid-column: 1 / -1;">
+        <h3>Unused CRM</h3>
+        <p>CRMs that are installed but never used, with no pipelines, no automation, no attribution. Just a dashboard nobody checks.</p>
+      </div>
+    </div>
+
+    <div class="problem-quote reveal">
+      <p>"Service businesses lose 30 to 70% of potential revenue not because of marketing,<br>but because of <span class="red" style="font-weight:700;">broken systems.</span>"</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  METHODOLOGY                          -->
+<!-- ══════════════════════════════════════ -->
+<section id="methodology" class="section methodology" aria-labelledby="method-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="pill pill-green">Our Methodology</div>
+      <h2 id="method-heading">We Build Revenue Engines,<br><span class="green">Not Campaigns</span></h2>
+      <p>Every layer is designed to eliminate human delay and revenue leakage.</p>
+    </div>
+
+    <div class="method-grid">
+      <div class="method-card reveal">
+        <h3>Traffic</h3>
+        <p>Paid, organic, and offline lead sources all feeding into one unified system, tracked and attributed end-to-end.</p>
+      </div>
+      <div class="method-card reveal">
+        <h3>CRM</h3>
+        <p>Custom pipelines, tagging logic, lifecycle stages, and attribution built to match exactly how you sell.</p>
+      </div>
+      <div class="method-card reveal">
+        <h3>Automation</h3>
+        <p>Instant response sequences, follow-ups, reminders, and reactivation, with zero manual effort required.</p>
+      </div>
+      <div class="method-card reveal">
+        <h3>AI</h3>
+        <p>AI agents that qualify leads, handle inbound calls, book appointments, and hand off clean to your team.</p>
+      </div>
+      <div class="method-card reveal">
+        <h3>Sales</h3>
+        <p>Clean handoff, fully tracked outcomes, and conversion data that feeds back into the top of the engine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  WHAT WE BUILD                        -->
+<!-- ══════════════════════════════════════ -->
+<section id="services" class="section services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="pill pill-green">What We Build</div>
+      <h2 id="services-heading">Revenue Systems,<br><span class="green">Not Quick Fixes</span></h2>
+      <p>Every component is designed to work together, creating a seamless flow from lead to revenue.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-tag tag-green">CRM Infrastructure</span>
+        <h3>Custom CRM Built For How You Sell</h3>
+        <p>We don't "install CRMs." We design deal pipelines, lifecycle stages, tagging logic, and attribution that match your business model, so nothing falls through the cracks.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-tag tag-orange">Automation Engine</span>
+        <h3>Instant Follow-Up, Zero Missed Leads</h3>
+        <p>Every lead receives an immediate response across SMS, WhatsApp, and email. Bookings, reminders, no-show recovery, and long-term nurture are fully automated.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-tag tag-teal">AI &amp; Agentic Systems</span>
+        <h3>AI That Works Leads While You Sleep</h3>
+        <p>AI voice and chat agents qualify leads, handle inbound calls, follow up, and book appointments, then pass qualified prospects directly to your sales team.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-tag tag-orange">Paid &amp; Organic Acquisition</span>
+        <h3>Traffic That Feeds The System</h3>
+        <p>Paid media, organic funnels, and offline lead ingestion are all connected directly into the same revenue system, fully tracked and attributed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  PRICING                              -->
+<!-- ══════════════════════════════════════ -->
+<section id="pricing" class="section pricing" aria-labelledby="pricing-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="pill pill-orange">Transparent Pricing</div>
+      <h2 id="pricing-heading">Investment That<br><span class="orange">Pays for Itself</span></h2>
+      <p>Four tiers of infrastructure. Tiers 3 &amp; 4 include ad spend bundled in.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Tier 1 -->
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Tier 1</div>
+        <div class="pricing-name">AI Receptionist</div>
+        <div class="pricing-amount">$997<span>&nbsp;/ month</span></div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            AI chat agent (24/7 website &amp; SMS)
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            24/7 AI voice receptionist
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Automated booking &amp; confirmation
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Missed call text-back system
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Clean handoff to sales team
+          </li>
+        </ul>
+        <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-dark-outline">Get Started →</a>
+      </div>
+
+      <!-- Tier 2 (Featured) -->
+      <div class="pricing-card featured reveal">
+        <div class="badge-popular">Most Popular</div>
+        <div class="pricing-tier">Tier 2</div>
+        <div class="pricing-name">Receptionist + Automation</div>
+        <div class="pricing-amount">$1,697<span>&nbsp;/ month</span></div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Everything in Tier 1
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Appointment reminders (SMS + email)
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            No-show recovery sequences
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Long-term lead nurture automation
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Patient reactivation campaigns
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Full CRM pipeline setup
+          </li>
+        </ul>
+        <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-orange">Book Strategy Call →</a>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Tier 3</div>
+        <div class="pricing-name">Receptionist + Automation + Google Ads</div>
+        <div class="pricing-amount">$3,297<span>&nbsp;/ month</span></div>
+        <div class="pricing-breakdown">$2,497 management + $800 Google Ads included</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Everything in Tier 2
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Google Ads management ($800 spend included)
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Full lead attribution tracking
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Landing page + conversion optimization
+          </li>
+        </ul>
+        <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-dark-outline">Get Started →</a>
+      </div>
+
+      <!-- Tier 4 -->
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Tier 4</div>
+        <div class="pricing-name">Full Growth System</div>
+        <div class="pricing-amount">$6,297<span>&nbsp;/ month</span></div>
+        <div class="pricing-breakdown">$4,497 management + $800 Google + $1,000 Meta = $1,800 ad spend included</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Everything in Tier 3
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Meta (Facebook + Instagram) Ads management
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            $1,800 total ad spend bundled in
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Dedicated growth strategist
+          </li>
+          <li class="pricing-feature">
+            <div class="check-green"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Monthly performance reviews
+          </li>
+        </ul>
+        <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-green">Apply Now →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  ABOUT                                -->
+<!-- ══════════════════════════════════════ -->
+<section id="about" class="section about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="pill pill-green">About Us</div>
+      <h2 id="about-heading">We're Not a<br><span class="muted">Marketing Agency</span></h2>
+    </div>
+
+    <div class="about-body">
+      <div class="about-text reveal">
+        <p>Atlas Growth Core is a growth systems and automation agency built for service businesses, specifically dental clinics and medical practices, that are already getting leads but losing revenue because of broken back-end processes.</p>
+        <p>Most agencies will sell you ads. We build the infrastructure that makes those ads worth running. That means CRM architecture, automation sequences, AI agents, and the data layer that connects every touchpoint from the first click to the closed patient.</p>
+        <p>We exist because we got tired of watching great practices lose 40 to 60% of their potential revenue to response delays, inconsistent follow-up, and CRMs that nobody actually uses. That ends here.</p>
+      </div>
+      <div class="about-pillars reveal">
+        <div class="pillar-card">
+          <h3>Infrastructure First</h3>
+          <p>We build the foundation before running a single ad. Systems before spend, always.</p>
+        </div>
+        <div class="pillar-card">
+          <h3>Automation Native</h3>
+          <p>Every process we design is automated by default. Human effort is reserved for high-value decisions only.</p>
+        </div>
+        <div class="pillar-card">
+          <h3>Revenue Focused</h3>
+          <p>We measure success in booked appointments and closed revenue, not clicks, impressions, or vanity metrics.</p>
+        </div>
+        <div class="pillar-card">
+          <h3>AI Enabled</h3>
+          <p>AI handles the repetitive, time-sensitive tasks, so your team focuses on patient experience and growth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  FREE ASSESSMENT                      -->
+<!-- ══════════════════════════════════════ -->
+<section id="assessment" class="section assessment" aria-labelledby="assessment-heading">
+  <div class="container">
+    <div class="assessment-inner reveal">
+      <div class="pill pill-orange">Free Assessment</div>
+      <h2 id="assessment-heading" style="font-size: clamp(28px,5vw,48px); font-weight:700; line-height:1.15; margin-bottom:10px;">Book a Free <span class="orange">Growth Audit</span></h2>
+      <p style="font-size:clamp(14px,2vw,16px); color:var(--text-muted); max-width:520px; margin:0 auto;">Find out exactly where your leads are getting lost, and how to fix it.</p>
+    </div>
+
+    <div class="assessment-cards">
+      <div class="checklist-card reveal">
+        <h3>What We'll Evaluate</h3>
+        <ul class="checklist-items">
+          <li class="checklist-item">
+            <div class="check-orange"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Response time under 60 seconds?
+          </li>
+          <li class="checklist-item">
+            <div class="check-orange"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Missed call handling in place?
+          </li>
+          <li class="checklist-item">
+            <div class="check-orange"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Lead source attribution?
+          </li>
+          <li class="checklist-item">
+            <div class="check-orange"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Automated follow-ups?
+          </li>
+          <li class="checklist-item">
+            <div class="check-orange"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Appointment reminders?
+          </li>
+          <li class="checklist-item">
+            <div class="check-orange"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            CRM usage consistency?
+          </li>
+          <li class="checklist-item">
+            <div class="check-orange"><svg class="check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Lead reactivation systems?
+          </li>
+        </ul>
+      </div>
+
+      <div class="score-card reveal">
+        <div>
+          <div class="score-number-wrap">
+            <div class="score-box">/10</div>
+            <div class="score-label">Revenue Systems<br>Score out of 10</div>
+          </div>
+        </div>
+        <div>
+          <h3>Get Your Revenue Systems Score</h3>
+          <p style="margin-top:8px;">You'll receive a score out of 10, a system diagnosis, and a clear path forward, at zero cost and zero obligation.</p>
+        </div>
+        <a href="https://api.leadconnectorhq.com/widget/otl/xsPSa0Ldt?slug=atlasgrowthcore-web-booking" target="_blank" class="btn btn-orange">Book A Free Growth Audit →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  FAQ                                  -->
+<!-- ══════════════════════════════════════ -->
+<section id="faq" class="section faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="pill pill-green">FAQ</div>
+      <h2 id="faq-heading">Common Questions</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-card reveal">
+        <h3>How is Atlas Growth Core different from a marketing agency?</h3>
+        <p>Traditional agencies focus on traffic. We focus on what happens after the click, the CRM, automation, AI, and systems that convert that traffic into booked patients and closed revenue. We only run ads once the back-end infrastructure is in place.</p>
+      </div>
+      <div class="faq-card reveal">
+        <h3>How quickly can the systems be live?</h3>
+        <p>Core systems, including the AI receptionist, missed call text-back, and booking automation, are typically live within 7 to 14 days. Full CRM build-outs and ad campaigns take 2 to 4 weeks depending on scope and onboarding speed.</p>
+      </div>
+      <div class="faq-card reveal">
+        <h3>Do I need to already have a CRM?</h3>
+        <p>No. We build your CRM from the ground up inside platforms like GoHighLevel or HubSpot, designed specifically for how your practice sells. If you already have a CRM, we'll audit and rebuild it to actually work.</p>
+      </div>
+      <div class="faq-card reveal">
+        <h3>What makes the AI agents different from a chatbot?</h3>
+        <p>Standard chatbots follow scripts. Our AI agents handle natural conversations, qualify leads, answer clinical questions, book appointments, follow up via voice and SMS, and hand off warm leads directly to your team, all without human supervision.</p>
+      </div>
+      <div class="faq-card reveal">
+        <h3>Is there a setup fee?</h3>
+        <p>All pricing shown is monthly retainer only. There is no separate setup fee. The build is included. We only win long-term if the system actually works, so we have every incentive to build it right from day one.</p>
+      </div>
+      <div class="faq-card reveal">
+        <h3>How do I know if my practice is ready for this?</h3>
+        <p>If you're spending money on any form of marketing, such as Google Ads, social, or referrals, and you're not converting every lead into a booked appointment, you're ready. Book the free audit and we'll tell you exactly what's leaking and how to fix it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!--  FOOTER                               -->
+<!-- ══════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <a href="#" class="nav-logo" aria-label="Atlas Growth Core">
+      <div class="logo-icon">A</div>
+      <div class="nav-logo-text">
+        <span>Atlas </span><span>Growth Core</span>
+      </div>
+    </a>
+    <p class="footer-tagline">"We build revenue engines, not campaigns."</p>
+    <p class="footer-copy">© Copyright 2026. All Rights Reserved. AtlasGrowthCore</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════ -->
+<!--  JS                                   -->
+<!-- ══════════════════════════════════════ -->
+<script>
+  // ── Hamburger menu ──────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ── Scroll reveal ───────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── Currency localisation ────────────────
+  (async function initCurrency() {
+    try {
+      // 1. Detect user's country via IP geolocation
+      const geoController = new AbortController();
+      const geoTimeout = setTimeout(() => geoController.abort(), 4000);
+      const geoRes = await fetch('https://ipapi.co/json/', { signal: geoController.signal });
+      clearTimeout(geoTimeout);
+      const geo = await geoRes.json();
+
+      if (geo.country_code !== 'GB') return; // Only localise for UK visitors
+
+      // 2. Fetch live USD → GBP exchange rate
+      const rateController = new AbortController();
+      const rateTimeout = setTimeout(() => rateController.abort(), 4000);
+      const rateRes = await fetch('https://api.exchangerate-api.com/v4/latest/USD', { signal: rateController.signal });
+      clearTimeout(rateTimeout);
+      const rateData = await rateRes.json();
+      const gbpRate = rateData && rateData.rates && rateData.rates.GBP;
+      if (!gbpRate) return;
+
+      // 3. Walk text nodes in a container and convert $X,XXX → £X,XXX
+      function convertPrices(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+        const nodes = [];
+        let node;
+        while ((node = walker.nextNode())) nodes.push(node);
+        nodes.forEach(function(n) {
+          const converted = n.textContent.replace(/\$([0-9,]+)/g, function(_, numStr) {
+            const usd = parseInt(numStr.replace(/,/g, ''), 10);
+            const gbp = Math.round(usd * gbpRate);
+            return '\u00A3' + gbp.toLocaleString('en-GB');
+          });
+          if (converted !== n.textContent) n.textContent = converted;
+        });
+      }
+
+      // Convert prices in the pricing section and FAQ
+      const pricingSection = document.getElementById('pricing');
+      if (pricingSection) convertPrices(pricingSection);
+      document.querySelectorAll('.faq-card p').forEach(function(el) { convertPrices(el); });
+
+      // 4. Add a subtle note below the pricing heading
+      const pricingHeader = pricingSection && pricingSection.querySelector('.section-header');
+      if (pricingHeader) {
+        const note = document.createElement('p');
+        note.style.cssText = 'font-size:13px;color:#9CA3AF;margin-top:10px;';
+        note.textContent = 'Prices shown in GBP (\u00A3) based on today\u2019s exchange rate.';
+        pricingHeader.appendChild(note);
+      }
+    } catch (e) {
+      // Silently fall back to USD if geolocation or rate fetch fails
+    }
+  })();
+</script>
+</body>
+</html>
